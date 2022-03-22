@@ -2743,6 +2743,15 @@ class RTCSession extends EventManager {
     // Local hold.
     if (_localHold! && !_remoteHold!) {
       logger.debug('mangleOffer() | me on hold, mangling offer');
+
+      if (sdp['direction'] != null) {
+        if (sdp['direction'] == 'sendrecv') {
+          sdp['direction'] = 'sendonly';
+        } else if (sdp['direction'] == 'recvonly') {
+          sdp['direction'] = 'inactive';
+        }
+      }
+
       for (Map<String, dynamic> m in sdp['media']) {
         if (holdMediaTypes.indexOf(m['type']) == -1) {
           continue;
