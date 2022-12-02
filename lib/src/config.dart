@@ -242,6 +242,11 @@ class Checks {
       if (dtmf_mode == null) return;
       dst!.dtmf_mode = dtmf_mode;
     },
+    'ice_gathering_timeout': (Settings src, Settings? dst) {
+      if (src.ice_gathering_timeout != 0) {
+        dst!.ice_gathering_timeout = src.ice_gathering_timeout;
+      }
+    }
   };
 }
 
