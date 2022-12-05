@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:logger/logger.dart';
+import 'package:sip_ua/src/event_manager/internal_events.dart';
 
 import 'package:sip_ua/src/rtc_session/refer_subscriber.dart';
 import 'config.dart';
@@ -276,6 +277,10 @@ class SIPUAHelper extends EventManager {
       refer.accept((RTCSession session) {
         logger.debug('session initialized.');
       }, buildCallOptions(true));
+    });
+
+    handlers.on(EventIceCandidate.Empty(), (EventIceCandidate event) async {
+      emit(event);
     });
 
     Map<String, dynamic> _defaultOptions = <String, dynamic>{

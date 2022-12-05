@@ -106,6 +106,12 @@ class EventReinvite extends EventType {
 
 class EventIceCandidate extends EventType {
   EventIceCandidate(this.candidate, this.ready);
+
+  EventIceCandidate.Empty()
+      : this(RTCIceCandidate(null, null, null), () async {
+          return;
+        });
+
   RTCIceCandidate candidate;
   Future<void> Function() ready;
 }
